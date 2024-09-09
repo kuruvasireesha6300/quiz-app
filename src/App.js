@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import HomePage from './COMPONENTS/HomePage'
+import Question from './COMPONENTS/Question'
+import Result from './COMPONENTS/Result'
 
-function App() {
+export const myBasket = React.createContext()
+
+function App() 
+{
+  const [page, setPage] = React.useState("homepage")
+
+  const [score, setScore] = React.useState(0)
+
+  //page = "homepage"
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+
+      <myBasket.Provider value={{mySetPage: setPage, myScore: score , mySetScore:setScore}}>
+         {page == "homepage" && <HomePage/>}
+         {page == "question" && <Question/>}
+         {page == "result" && <Result/>}
+      </myBasket.Provider>
+      
+      
+      
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
